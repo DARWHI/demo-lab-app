@@ -1,10 +1,22 @@
 import { staticData } from '../data';
+import { useSelector, useDispatch } from 'react-redux';
+import moment from 'moment';
 
 export const Schedule = ({ workstationId }) => {
 
+    const allReservations = useSelector(state => state.reservations);
+    const dispatch = useDispatch();
+
+    const workstationReservations = allReservations.filter(i => i.workstationId === workstationId);
+
+    console.log(workstationReservations)
+
     // 24 hours / 30 minutes per slot
     const bookingSlots = 48;
+    // 5 days of bookings
+    const days = 5;
 
+    const dayArr = [...Array(days)].map((d, i) => moment().add('day', i).format('DD MMM YYYY'));
 
     //https://stackoverflow.com/questions/36125038/generate-array-of-times-as-strings-for-every-x-minutes-in-javascript
     var x = 30; //minutes interval
@@ -20,20 +32,37 @@ export const Schedule = ({ workstationId }) => {
         tt = tt + x;
     }
 
-    console.log(workstationId)
+    const handleSlotClick = ({ slot, day }) => {
+        dispatch({
+            type: "BOOK_WORKSTATION",
+            payload: {
+                date: day,
+                slot,
+                username: 'admin',
+                workstationId
+            }
+        })
+    }
 
     return (
         <>
+        Schedule
         {
-            workstationId ? <ul>
-                {
-                    times.map((slot, indx) => indx < bookingSlots &&
-                        <li className="timeslot" key={indx}>
-                            {slot + ' : '}
-                            {times[indx + 1] ? times[indx + 1] : '00:00AM'}
-                        </li>)
-                }
-            </ul > : <></>
+            workstationId ?
+            dayArr.map(day =>
+                    <ul className="schedule-day" key={day}>
+                        {day}
+                        {
+                            times.map((slot, indx) => indx < bookingSlots &&
+                                <li className="timeslot" key={slot} onClick={() => handleSlotClick({ day, slot: indx })}>
+                                    {slot + ' : '}
+                                    {times[indx + 1] ? times[indx + 1] : '00:00AM'}
+                                </li>)
+                        }
+
+                    </ul>
+                )
+                : <>Select a workstation from the list above to see the schedule</>
         }
         </>
     )
