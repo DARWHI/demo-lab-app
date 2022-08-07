@@ -12,3 +12,46 @@ code {
     monospace;
 }
 
+.timeslot{
+  list-style: none;
+  padding: 5px;
+  color: gray;
+  border: 2px blue solid;
+  border-radius: 2px;
+  margin-bottom: 3px;
+}
+
+.main-nav{
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-link{
+  list-style: none;
+  border: 1px solid black;
+  background-color: gray;
+  color: white;
+  border-radius: 2px;
+  padding: 2px;
+  margin-left: 5px
+}
+
+.nav-link a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.workstation-container{
+  list-style: none;
+  border: 2px black solid;
+  border-radius: 2px;
+  padding: 5px;
+  margin: 8px;
+}
+
+.workstation-selected{
+  list-style: none;
+  border: 4px green solid;
+  border-radius: 2px;
+}
+

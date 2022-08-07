@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 export const Login = ({ isAutheticated, setIsAuthenticated }) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    let navigate = useNavigate();
 
     const handleUsernameChange = (e) => {
         console.log(e)
@@ -31,7 +33,8 @@ export const Login = ({ isAutheticated, setIsAuthenticated }) => {
         const user = allUsers.find(user => user.username === username && user.password === password);
 
         if (user) {
-            setIsAuthenticated(true)
+            setIsAuthenticated(true);
+            navigate("../computer-lab", { replace: true });
         }
     };
 
