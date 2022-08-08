@@ -5,16 +5,13 @@ export const Login = ({ isAutheticated, setIsAuthenticated }) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleUsernameChange = (e) => {
-        console.log(e)
         setUsername(e.target.value)
     };
 
     const handlePasswordChange = (e) => {
-        console.log(e)
         setPassword(e.target.value)
     };
 
@@ -34,21 +31,29 @@ export const Login = ({ isAutheticated, setIsAuthenticated }) => {
 
         if (user) {
             setIsAuthenticated(true);
-            navigate("../computer-lab", { replace: true });
+            localStorage.setItem('current-user', username)
+            navigate("../computer-lab", { replace: true, state: { username } });
         }
     };
 
     return (
-        <div className="login-form">
-            <form>
-                <label htmlFor="username">Username: </label>
-                <input type="text" name="username" id="username" value={username} onChange={handleUsernameChange} />
+        <div className="page-section">
+            <div className="page-section-title">Login</div>
+            <div className="login-form">
+                <form>
+                    <label htmlFor="username">Username: </label>
+                    <input type="text" name="username" id="username" value={username} onChange={handleUsernameChange} />
 
-                <label htmlFor="password">Password:</label>
-                <input type="password" name="password" id="password" value={password} onChange={handlePasswordChange} />
+                    <br />
 
-                <button onClick={handleLogin}>Login</button>
-            </form>
+                    <label htmlFor="password">Password:</label>
+                    <input type="password" name="password" id="password" value={password} onChange={handlePasswordChange} />
+
+                    <br />
+
+                    <button onClick={handleLogin}>Login</button>
+                </form>
+            </div>
         </div>
     )
 };

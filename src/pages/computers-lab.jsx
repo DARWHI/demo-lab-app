@@ -1,24 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { WorkStation } from '../components/workstation';
 import { Schedule } from '../components/schedule';
 import { staticData } from '../data.js';
 import { store } from '../store/store';
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 
 export const ComputerLab = () => {
 
-    const [selectedWorkstation, setSelectedWorkstation] = useState('')
+    const [selectedWorkstation, setSelectedWorkstation] = useState('');
 
     const handleWorkstationSelection = id => {
         setSelectedWorkstation(id);
     };
-    console.log(store.getState())
 
     return (
         <Provider store={store}>
-            <div>
-                Computer Lab
-            <ul>
+            <div className="page-section">
+                <div className="page-section-title">Workstations</div>
+                <ul>
                     {
                         staticData.workstations.map(
                             ws =>
@@ -33,6 +32,6 @@ export const ComputerLab = () => {
                 </ul>
                 <Schedule workstationId={selectedWorkstation} />
             </div>
-        </Provider>
+        </Provider >
     )
 };

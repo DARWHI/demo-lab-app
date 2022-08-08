@@ -1,6 +1,11 @@
 import { Outlet, Link } from "react-router-dom";
 
-export const Layout = ({ isAutheticated }) => {
+export const Layout = ({ isAutheticated, setIsAuthenticated }) => {
+
+    const handleLogout = () => {
+        setIsAuthenticated(false);
+    }
+
     return (
         <>
         <nav>
@@ -12,7 +17,7 @@ export const Layout = ({ isAutheticated }) => {
                     <Link to="/register">Register</Link>
                 </li>}
                 {isAutheticated && <li className="nav-link">
-                    <Link to="/computer-lab">Computer Lab</Link>
+                    <Link onClick={handleLogout} to="/">Logout</Link>
                 </li>
                 }
             </ul>

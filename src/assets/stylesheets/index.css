@@ -16,6 +16,17 @@ code {
   border: 2px blue solid;
   border-radius: 2px;
   margin-bottom: 3px;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.booked {
+  background-color: red;
+}
+
+.available {
+  background-color: green;
 }
 
 .main-nav {
@@ -40,7 +51,7 @@ code {
 
 .workstation-container {
   list-style: none;
-  border: 2px black solid;
+  border: 1px black solid;
   border-radius: 2px;
   padding: 5px;
   margin: 8px;
@@ -49,10 +60,92 @@ code {
 .workstation-selected {
   list-style: none;
   border: 4px green solid;
+  background-color: lightgreen;
   border-radius: 2px;
 }
 
 .schedule-day {
   border: 2px black solid;
   border-radius: 4px;
+}
+
+.accordion {
+  width: 200px;
+  border: 2px blue solid;
+  padding: 3px;
+  margin: 5px;
+}
+
+.expanded {
+  height: auto;
+}
+
+.closed {
+  height: 20px;
+}
+
+.accordion-header {
+  display: flex;
+  flex-direction: row;
+  background-color: lightblue;
+}
+
+.accordion-title {
+  width: 80%;
+}
+
+.accordion-expanded {
+  width: 20%;
+  text-align: right;
+}
+
+.schedule {
+  display: flex;
+  flex-direction: row;
+}
+
+.reservation-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.reservation {
+  width: 8px;
+  height: 8px;
+  border-radius: 3px;
+}
+
+.reserved {
+  background-color: red;
+}
+
+.available {
+  background-color: green;
+}
+
+.reservation-text {
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 10px;
+  margin-left: 20px;
+}
+
+.page-section {
+  width: 100%;
+  border: 3px gray solid;
+}
+
+.page-section-title {
+  font-size: 18px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.workstation-id {
+  color: blue;
+}
+
+.desk-number {
+  color: green;
 }

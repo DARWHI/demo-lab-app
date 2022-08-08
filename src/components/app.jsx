@@ -9,9 +9,10 @@ export const App = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Layout isAutheticated={isAutheticated}/>}>
+                <Route path="/" element={<Layout isAutheticated={isAutheticated} setIsAuthenticated={setIsAuthenticated} />}>
+                    {!isAutheticated && <Route path="login" element={<Login isAutheticated={isAutheticated} setIsAuthenticated={setIsAuthenticated} />} />}
                     {!isAutheticated && <Route index element={<Login isAutheticated={isAutheticated} setIsAuthenticated={setIsAuthenticated} />} />}
-                    {!isAutheticated && <Route path="register" element={<Register />} />}
+                    {!isAutheticated && <Route path="register" element={<Register setIsAuthenticated={setIsAuthenticated} />} />}
                     {isAutheticated && <Route path="computer-lab" element={<ComputerLab />} />}
                 </Route>
             </Routes>

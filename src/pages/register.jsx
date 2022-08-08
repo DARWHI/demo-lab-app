@@ -1,53 +1,67 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
-export const Register = () => {
+export const Register = ({ setIsAuthenticated }) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [verifiedPassword, setVerifiedPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleRegister = (e) => {
         e.preventDefault();
 
-        const newUser = { username: username, password: password };
+        const newUser = { username, password };
         const users = localStorage.getItem('lab-users');
 
         const updatedUsers = users ? [...users, newUser] : [newUser];
 
-        localStorage.setItem('lab-users', updatedUsers);
+        localStorage.setItem('lab-users', JSON.stringify(updatedUsers));
+
+        if (newUser) {
+            setIsAuthenticated(true);
+            localStorage.setItem('current-user', username)
+            navigate("../computer-lab", { replace: true, state: { username } });
+        }
     };
 
     const handleUsernameChange = (e) => {
-        console.log(e)
         setUsername(e.target.value)
     };
 
     const handlePasswordChange = (e) => {
-        console.log(e)
         setPassword(e.target.value)
     };
 
     const handleVerifiedPasswordChaneg = (e) => {
-        console.log(e)
         setVerifiedPassword(e.target.value)
     };
 
 
     return (
-        <div className="login-form">
-            <form>
-                <label htmlFor="username">Username: </label>
-                <input type="text" name="username" id="username" value={username} onChange={handleUsernameChange} />
 
-                <label htmlFor="password">Password:</label>
-                <input type="password" name="password" id="password" value={password} onChange={handlePasswordChange} />
+        <div className="page-section">
+            <div className="page-section-title">Register</div>
+            <div className="login-form">
+                <form>
+                    <label htmlFor="username">Username: </label>
+                    <input type="text" name="username" id="username" value={username} onChange={handleUsernameChange} />
 
+                    <br />
 
-                <label htmlFor="verified-password">Verify Password:</label>
-                <input type="password" name="verified-password" id="verified-password" value={verifiedPassword} onChange={handleVerifiedPasswordChaneg} />
+                    <label htmlFor="password">Password:</label>
+                    <input type="password" name="password" id="password" value={password} onChange={handlePasswordChange} />
 
-                <button onClick={handleRegister}>Register</button>
-            </form>
+                    <br />
+
+                    <label htmlFor="verified-password">Verify Password:</label>
+                    <input type="password" name="verified-password" id="verified-password" value={verifiedPassword} onChange={handleVerifiedPasswordChaneg} />
+
+                    <br />
+
+                    <button onClick={handleRegister}>Register</button>
+                </form>
+            </div>
         </div>
     )
 
